@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A8D14D462D623D460091A3F3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A8D14D452D623D460091A3F3 /* Alamofire */; };
+		A8D150222D664A600091A3F3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A8D150212D664A600091A3F3 /* SDWebImage */; };
+		A8D150242D664A610091A3F3 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A8D150232D664A610091A3F3 /* SDWebImageMapKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A8C5D7962D60951A0087149D /* NetflixUIKitRevision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixUIKitRevision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8D150222D664A600091A3F3 /* SDWebImage in Frameworks */,
+				A8D150242D664A610091A3F3 /* SDWebImageMapKit in Frameworks */,
+				A8D14D462D623D460091A3F3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +87,9 @@
 			);
 			name = NetflixUIKitRevision;
 			packageProductDependencies = (
+				A8D14D452D623D460091A3F3 /* Alamofire */,
+				A8D150212D664A600091A3F3 /* SDWebImage */,
+				A8D150232D664A610091A3F3 /* SDWebImageMapKit */,
 			);
 			productName = NetflixUIKitRevision;
 			productReference = A8C5D7962D60951A0087149D /* NetflixUIKitRevision.app */;
@@ -107,6 +119,10 @@
 			);
 			mainGroup = A8C5D78D2D60951A0087149D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A8D14D442D623D460091A3F3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A8D150202D664A600091A3F3 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A8C5D7972D60951A0087149D /* Products */;
 			projectDirPath = "";
@@ -150,7 +166,6 @@
 				INFOPLIST_FILE = NetflixUIKitRevision/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -178,7 +193,6 @@
 				INFOPLIST_FILE = NetflixUIKitRevision/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -335,6 +349,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A8D14D442D623D460091A3F3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		A8D150202D664A600091A3F3 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A8D14D452D623D460091A3F3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8D14D442D623D460091A3F3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		A8D150212D664A600091A3F3 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8D150202D664A600091A3F3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		A8D150232D664A610091A3F3 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8D150202D664A600091A3F3 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A8C5D78E2D60951A0087149D /* Project object */;
 }
