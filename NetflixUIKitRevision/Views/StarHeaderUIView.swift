@@ -85,6 +85,10 @@ class StarHeaderUIView: UIView {
         NSLayoutConstraint.activate(downloadButtonConstraints)
         
     }
+    public func configure(model : TitleViewModel){
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterUrl)") else { return }
+        starImageView.sd_setImage(with: url)
+    }
 }
 #Preview{
     StarHeaderUIView()

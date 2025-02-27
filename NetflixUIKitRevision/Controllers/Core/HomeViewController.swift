@@ -17,6 +17,8 @@ class HomeViewController: UIViewController{
     
     let sectionHeaders = ["trending Movies", "populAr movies", "tOP Rated Movies", "Upcoming Movies"]
     
+    private var starHeaderUIView : StarHeaderUIView?
+    
     private let homeFeedTable : UITableView = {
 //        let table = UITableView() used when we didn't wanted headers for sections
         let table = UITableView(frame: .zero, style: .grouped) //frame==size = 0 works as we have changed it in viewDidLayoutSubviews
@@ -51,9 +53,13 @@ class HomeViewController: UIViewController{
 //        homeFeedTable.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         
         //custom header view for table
-        homeFeedTable.tableHeaderView = StarHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        
+        starHeaderUIView = StarHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        homeFeedTable.tableHeaderView = starHeaderUIView
         
         configureNavigationBar()
+        
+        configureStarHeaderView()
     }
     //  viewDidLayoutSubviews is a lifecycle method in UIViewController called after the view’s subviews have laid out. This happens after viewDidLoad() and potentially multiple times during the view’s lifecycle
     override func viewDidLayoutSubviews() {
@@ -82,6 +88,19 @@ class HomeViewController: UIViewController{
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil),
         ]
         navigationController?.navigationBar.tintColor = .label
+    }
+    func configureStarHeaderView(){
+        APICaller.shared.fetchTrendingMovies { [weak self] result in
+            switch result{
+            case .success(let data):
+                let randomMovie = data.results.randomElement()
+                
+                self?.starHeaderUIView?.configure(model: TitleViewModel(titleName: randomMovie?.title ?? "no title", posterUrl: randomMovie?.posterPath ?? ""))
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     //to change the scrolling of navbar
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -128,6 +147,36 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate{
         
         //        cell.textLabel?.text = "\(indexPath)"
         //        cell.detailTextLabel?.text = "sdsd"
+        
+        
+        cell.delegate = self
+        /*
+         cell ko tap kiya par cell ko pta nhi h kya karna h tap pe to cell ne homeViewController ko bol diya tu karle jo karna h => cell.delegate i.e cell ko jb delegate ho to self(homeViewController) ko bol diya
+         
+         
+         When we say “Whenever something happens that requires a delegate, call me”, it means:
+
+         👉 There is an event or action inside a class (like a cell) that needs to notify another class (like a view controller) to handle it.
+
+         Since CollectionViewTableViewCell does not know what to do when an item is selected, it delegates that responsibility to another class (like HomeViewController), which is why it needs a delegate.
+         
+         🔹 What Kind of Events “Require a Delegate”?
+
+         Any action inside a class that needs an external class to handle it usually requires a delegate. Examples:
+
+         1️⃣ When a user taps a collection view cell inside a table view cell
+             •    The CollectionViewTableViewCell doesn’t know what to do when a movie is tapped.
+             •    It calls delegate?.didSelectItem(movie:), so HomeViewController handles it.
+
+         2️⃣ When a button is tapped inside a custom cell
+             •    Suppose there’s a “Favorite” button inside a cell.
+             •    The cell doesn’t store favorites, so it delegates that responsibility to the view controller.
+             •    The view controller updates the favorites list when delegate?.didTapFavorite(movie:) is called.
+
+         3️⃣ When a switch is toggled inside a cell
+             •    The cell notifies the view controller that the switch changed.
+             •    The view controller then updates the settings.
+         */
         
         switch indexPath.section{
         case Sections.trendingMovies.rawValue:
@@ -196,6 +245,16 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate{
         return 40
     }
 }
+extension HomeViewController : CollectionViewTableViewCellProtocol{
+    func CollectionViewTableViewCellDidTap(cell: CollectionViewTableViewCell, viewModel: TitleDetailsViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitleDetailsViewController()
+            vc.configure(model: viewModel)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
 #Preview{
 //    HomeViewController()
     MainTabBarViewController()

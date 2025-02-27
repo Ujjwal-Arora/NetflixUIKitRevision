@@ -31,7 +31,7 @@ struct MovieOrTv: Codable {
     let mediaType: String?
     let adult: Bool?
     let originalLanguage: String?
-    let genreIDs: [Int]?
+//    let genreIDs: [Int]?
     let popularity: Double?
     let releaseDate: String?
     let video: Bool?
@@ -47,7 +47,7 @@ struct MovieOrTv: Codable {
         case backdropPath = "backdrop_path"
         case mediaType = "media_type"
         case originalLanguage = "original_language"
-        case genreIDs = "genre_ids"
+//        case genreIDs = "genre_ids"
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
